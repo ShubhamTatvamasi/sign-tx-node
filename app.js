@@ -14,24 +14,24 @@ const data = myContract.methods.updateMessage(message).encodeABI()
 
 web3.eth.getTransactionCount(PublicKey, (err, nonce) => {
 
-   const formatedPrivateKey = PrivateKey.substring(2);
-   const privateKey = Buffer.from(formatedPrivateKey, 'hex')
+  const formatedPrivateKey = PrivateKey.substring(2);
+  const privateKey = Buffer.from(formatedPrivateKey, 'hex')
 
-   const txParams = {
-     nonce: nonce,
-     gasPrice: 1e9,
-     gasLimit: 1e6,
-     to: contract.address,
-     value: 0,
-     data: data
-   }
+  const txParams = {
+    nonce: nonce,
+    gasPrice: 1e9,
+    gasLimit: 1e6,
+    to: contract.address,
+    value: 0,
+    data: data
+  }
 
-   const tx = new EthereumTx(txParams)
-   tx.sign(privateKey)
-   const signedTX = "0x" + tx.serialize().toString('hex')
+  const tx = new EthereumTx(txParams)
+  tx.sign(privateKey)
+  const signedTX = "0x" + tx.serialize().toString('hex')
+  
+  web3.eth.sendSignedTransaction(signedTX, (error, result) => {
     
-   web3.eth.sendSignedTransaction(signedTX, (error, result) => {
-     
-    console.log(result)
-   })
+  console.log(result)
+  })
 })
