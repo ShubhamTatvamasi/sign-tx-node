@@ -14,8 +14,8 @@ const data = myContract.methods.updateMessage(message).encodeABI()
 
 web3.eth.getTransactionCount(PublicKey, (err, nonce) => {
 
-   const formatedPrivteKey = PrivateKey.substring(2);
-   const privateKey = Buffer.from(formatedPrivteKey, 'hex')
+   const formatedPrivateKey = PrivateKey.substring(2);
+   const privateKey = Buffer.from(formatedPrivateKey, 'hex')
 
    const txParams = {
      nonce: nonce,
