@@ -12,7 +12,7 @@ const message = 'Coffee Lake'
 
 const data = myContract.methods.updateMessage(message).encodeABI()
 
-web3.eth.getTransactionCount(PublicKey, (err, nonce) => {
+web3.eth.getTransactionCount(PublicKey, (error, nonce) => {
 
   const formatedPrivateKey = PrivateKey.substring(2);
   const privateKey = Buffer.from(formatedPrivateKey, 'hex')
@@ -30,8 +30,9 @@ web3.eth.getTransactionCount(PublicKey, (err, nonce) => {
   tx.sign(privateKey)
   const signedTX = "0x" + tx.serialize().toString('hex')
   
-  web3.eth.sendSignedTransaction(signedTX, (error, result) => {
-    
-  console.log(result)
+  web3.eth.sendSignedTransaction(signedTX).on('receipt', (receipt) => {
+    // this will only print after the confirmation
+    console.log(receipt.transactionHash)
   })
+
 })
