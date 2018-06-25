@@ -31,7 +31,7 @@ web3.eth.getTransactionCount(PublicKey, (error, nonce) => {
   const signedTX = "0x" + tx.serialize().toString('hex')
   
   web3.eth.sendSignedTransaction(signedTX).on('receipt', (receipt) => {
-    // this will only print after the confirmation
+    // this will only print after transaction block has been added on blockchain
     console.log(receipt.transactionHash)
   })
 
